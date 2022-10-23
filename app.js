@@ -41,11 +41,12 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-
-app.get( '*', function(req, res, next){
+console.log('ddd1')
+app.get('*', function(req, res, next){
     res.locals.cart = req.session.cart;
     next();
 })
+console.log('ddd2')
 
 
 //import router files
