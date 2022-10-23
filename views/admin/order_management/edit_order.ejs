@@ -1,0 +1,107 @@
+<h2>Edit Order Page</h2>
+<h3>Edit Order ID :<%=id %> </h3>
+  <%
+  let id1 = id
+  %> 
+<form action="/admin/order_info/<%=id %>/edit_order?_method=PUT" method="POST">
+
+   <div class="order-info">
+  <div> Order By: <%= orders.recname %> </div>
+  <div>Order Date: <%= orders.orderdate.toDateString() + ' ' +  orders.orderdate.toTimeString().split(' ')[0] %></div>
+  
+  
+
+  <div> Recepient Name<input type="text" name="name" value="<%= orders.recname %>"></div>
+ <div> Recepient Phone <input type="text" name="phone" value="<%= orders.recphone %>"></div>
+
+<div> Ship To: <input type="text" name="address" value="<%= orders.shippingaddress %>">  </div>
+     <div>
+   
+        <span>Payment Method</span>
+           <select name="paymentmethod">
+            <option value="Cash on delievery">Cash on delievery</option>
+            <option value="Paypal">Paypal</option>
+            <option value="Creadit">Creadit or Debit</option>
+            <option value="bank">Bank Transfer</option>
+           </select> 
+        </div>
+        
+
+        <div>
+            <span>Order Status</span>
+            <select  name="status" >
+        
+                <option  value="<%= orders.orderstatus %>">Shipping</option>
+                <option value="<%= orders.orderstatus %>">Completed</option>
+                <option value="<%= orders.orderstatus %>">Processing</option>
+            </select>
+        </div>
+   </div>
+   
+   <div> <button type="submit">Save</button>  &nbsp &nbsp &nbsp
+    <a href="#">cancel</a>
+    </div>
+</form> 
+   
+   
+   <div><h3>Ordered Books</h3></div>
+   
+   
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>No </th>
+            <th>Book</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>SubTotal</th>
+            <th> <a href="/admin/order_management/add_book/<%= id %>"> Add Book </a> </th>
+        </tr>
+        <% let counter=0 %>
+        <% let total_copies = 0 %>
+        <% let total_price = 0 %>
+            <% books.forEach(book=> { %>
+            <% var sub = parseFloat(book.qty * book.price).toFixed(2) %>
+            <% total_copies += +book.qty; %>
+            <% total_price += +sub %> 
+                <tr>
+                    <td>
+                        <%= ++counter %>
+                    </td>
+                    <td>
+                      <a href="/admin/book_management/<%= book._id %>">  <img src="<%= book.image%>" height="110px" width="84px"> </a>
+                        <%= book.title %>
+                    </td>
+                    <td><%= book.book_author %></td>
+                    <td><%= book.price %></td>
+                    <td>
+                        <%- include('./edit_form.ejs', {url:`/admin/order_management/${id}/${book.title}/${book.qty}?action=add`}); %>
+                        <span> <%= book.qty %></span>&nbsp; &nbsp;
+                        <%- include('./edit_form2.ejs', {url:`/admin/order_management/${id}/${book.title}/${book.qty}?action=subtract`}); %> 
+                    </td>
+                    <td>
+                    <input type="text" name="book_qty" value="<%= book.qty %>" size="5">
+                    </td>
+                    <td>$<%= sub %></td>
+                    <td>
+                        <%- include('./delete_order.ejs', {url:`/admin/order_management/${id}/${book.title}/${book.qty}?action=delete`}); %>                    
+                    </td>
+                </tr>
+                <% }) %>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+       <td> Total </td>
+       <td><span> <%= total_copies %></span></td>  
+       <td> $ <%= total_price %> 
+    
+    </td>
+    </tr>
+    </table>
+    <form  action="/admin/order_management/bookid/<%= id1 %>" method="POST">
+        <input type="hidden" name="total_copies" value="<%= total_copies %>"> 
+        <input type="hidden" name="total_price" value="<%= total_price %>">
+        <button type="submit">Done Updating</button>
+    </form>
+    

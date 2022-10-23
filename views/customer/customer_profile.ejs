@@ -1,0 +1,25 @@
+
+<%- include('../partials/customer_header', {customer:customer}) %>
+
+<%- include('../partials/customer_categories') %>
+<h2>Customer Profile Page <%= customer.email %></h2>
+
+<div>
+<% if(customer_info) { %>    
+<h4>E-Mail Address : <%= customer_info.email %></h4>
+<h4>Full-Name:   <%= customer_info.fullname %> </h4>
+<h4>Phone Number: <%= customer_info.phonenumber %> </h4>
+<h4>Address:   <%= customer_info.address %> </h4>
+<h4>City:  <%= customer_info.city %> </h4>
+<h4>Zip Code: <%= customer_info.zipcode %> </h4>
+<h4>Country: <%= customer_info.country %> </h4>
+
+<a href="/everygreen/customer_profile/<%= customer._id %>/edit">Edit My Profile</a>
+
+<% } %>
+<% if(!customer_info) { %>
+<a href="/everygreen/complete_customer_profile/<%= customer_info._id %>">Complete Your Profile</a>
+<% } %>
+</div>
+
+

@@ -1,0 +1,16 @@
+<%- include("../../partials/admin_category.ejs") %>
+<h2>Edit User</h2>
+<form action="/admin/user_management/<%=user._id %>?_method=PUT" method="POST">
+   
+    <label>username</label>
+    <input type="text" name="username" value="<%= user.username %>">
+
+    <label>email</label>
+    <input type="email" name="email" value="<%= user.email %>">
+
+    <label>Password</label>
+    <input type="password" name="password" value="<%= user.password %>">
+
+
+   <button type="submit">Subddmit</button>
+</form>

@@ -1,0 +1,70 @@
+<h2>HEllo dear</h2>
+<h3>Details of Order ID :<%=id %> </h3>
+   
+   <h2>Order OverView </h2>
+   <div class="order-info">
+  <div> Order By: <%= orders.recname %> </div>
+    <div> Book Copies: <%= orders.orderqty %> </div>
+     <div> Total Amount: $<%= orders.ordertotal %></div>
+     <div> Recepient Name:  <%= orders.recname %></div>
+     <div>Recepient Phone: <%= orders.recphone %></div>
+
+     <div>Ship To: <%= orders.shippingaddress %></div>
+     <div>Payment Method: <%= orders.paymentmethod %></div>
+     <div>Order Status: <%= orders.orderstatus %> </div>
+     <div>Order Date: <%= orders.orderdate.toDateString() + ' ' +  orders.orderdate.toTimeString().split(' ')[0] %></div>
+   </div>
+   
+   
+   
+   
+   <div><h3>Ordered Books</h3></div>
+   
+   
+    <table border="1" cellpadding="5">
+        <tr>
+            <th>No </th>
+            <th>Book</th>
+            <th>Author</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>SubTotal</th>
+        </tr>
+        <% let counter=0 %>
+        <% let total_copies = 0 %>
+        <% let total_price = 0 %>
+            <% books.forEach(book=> { %>
+            <% var sub = parseFloat(book.qty * book.price).toFixed(2) %>
+            <% total_copies += +book.qty; %>
+            <% total_price += +sub %> 
+                <tr>
+                    <td>
+                        <%= ++counter %>
+                    </td>
+                    <td>
+                      <a href="/admin/book_management/<%= book._id %>">  <img src="<%= book.image%>" height="110px" width="84px"> </a>
+                        <%= book.title %>
+                    </td>
+                    <td><%= book.book_author %></td>
+                    <td><%= book.price %></td>
+                    <td>
+                        <%= book.qty %>
+                    </td>
+                    <td>$<%= sub %></td>
+                </tr>
+                <% }) %>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+       <td> Total </td>
+       <td><span> <%= total_copies %></span></td>  
+       <td> $ <%= total_price %> 
+    
+    </td>
+    </tr>
+    </table>
+    <div><a href="/admin/order_management/edit_order/<%= orders._id%>">Edit this Order</a>  &nbsp &nbsp &nbsp
+    <%- include("../../partials/delete_form", {url:`/admin/orders_management/${orders._id}` }) %>
+    </div>
+ 

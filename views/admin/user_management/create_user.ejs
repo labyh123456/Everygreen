@@ -1,0 +1,7 @@
+<%- include("../../partials/admin_category.ejs") %>
+<h2>Create new User</h2>
+<form action="/admin/create_user" method="post">
+    <%- include("../../partials/create_user.ejs") %>
+    <input type="submit" value="Save">
+   <a href="/admin"> <input  type="button" value="Cancel"> </a>
+</form>

@@ -1,0 +1,69 @@
+    <%- include('../partials/customer_header') %>
+    <%- include('../partials/customer_categories', {categories:categories}) %>
+                <main class="main-body">
+        <section class="main-book" style="border: 1px solid black;">
+            <h2>New Books   </h2>
+                <% books.forEach(book => { %>
+                <a href="/everygreen/show_book/<%= book._id %>">  <img src="<%= book.coverImagePath %>" height="110px" width="84px"></a>
+                <span><a href="#"><%= book.title %></a></span>
+                <span> <%- include('../customer/Calc_Func.ejs') %>
+                   <% let a = (getAverageRating(book.bookrating)) %>
+                  <%
+                  const starPercentage = (a/ 5) * 100;
+                  const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+                width_rev = starPercentageRounded;
+                %>
+                </span>
+                <div class="stars-outer">
+                    <div class="stars-inner" style="width: <%= width_rev %>"> </div>
+                  </div>
+                <span> By <%= book.author %></span>
+                <span>$<%= book.price %> </span>
+          <%  }) %>
+        </section>
+
+        <section class="main-book" style="border: 1px solid black;">
+          <h2>Most Selling Books </h2>
+              <% selling_books.forEach(book => { %>
+              <a href="/everygreen/show_book/<%= book._id %>">  <img src="<%= book.coverImagePath %>" height="110px" width="84px"></a>
+              <span><a href="#"><%= book.title %></a></span>
+              <span> <%- include('../customer/Calc_Func.ejs') %>
+                 <% let a = (getAverageRating(book.bookrating)) %>
+                <%
+                const starPercentage = (a/ 5) * 100;
+                const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+              width_rev = starPercentageRounded;
+              %>
+              </span>
+              <div class="stars-outer">
+                  <div class="stars-inner" style="width: <%= width_rev %>"> </div>
+                </div>
+              <span> By <%= book.author %></span>
+              <span>$<%= book.price %> </span>
+        <%  }) %>
+      </section>
+
+      <section class="main-book" style="border: 1px solid black;">
+        <h2>Most Favourite Books </h2>
+            <% favourite_books.forEach(book => { %>
+            <a href="/everygreen/show_book/<%= book._id %>">  <img src="<%= book.coverImagePath %>" height="110px" width="84px"></a>
+            <span><a href="#"><%= book.title %></a></span>
+            <span> <%- include('../customer/Calc_Func.ejs') %>
+               <% let a = (getAverageRating(book.bookrating)) %>
+              <%
+              const starPercentage = (a/ 5) * 100;
+              const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+            width_rev = starPercentageRounded;
+            %>
+            </span>
+            <div class="stars-outer">
+                <div class="stars-inner" style="width: <%= width_rev %>"> </div>
+              </div>
+            <span> By <%= book.author %></span>
+            <span>$<%= book.price %> </span>
+      <%  }) %>
+    </section>
+
+
+       
+        </main>

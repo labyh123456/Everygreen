@@ -1,0 +1,65 @@
+<h2></h2>
+<%- include('../partials/customer_header') %>
+<div>
+  <h2>  <%= book.title %> </h2>
+</div>
+<div>
+<h3>  by <%= book.author %></h3>
+</div>
+<div>
+<img src="<%= book.coverImagePath %>" height="300x" width="264px"> 
+</div>
+<div>
+      <%- include('../customer/Calc_Func.ejs') %>
+        <% let a = (getAverageRating(book.bookrating)) %>
+       <%
+       const starPercentage = (a/ 5) * 100;
+       const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+     width_rev = starPercentageRounded;
+     %>
+
+     <div class="stars-outer">
+        <div class="stars-inner" style="width: <%= width_rev %>"> </div>
+      </div>
+
+  <a href="#review-section"> <%= reviews.length %> Reviews </a>
+</div>
+
+<div>
+    $<%= book.price %>
+</div>
+<div>
+    <a href="/everygreen/cart/<%= book._id %>"> Add to cart </a>
+  </div>
+
+<div>
+    <%= book.desc %>
+ </div>
+ 
+ <div>
+    <a href="/everygreen/write_review/<%= book._id %>"> Write a Customer Review</a>
+ </div>
+ 
+ <h2>Customer Review </h2>
+ <div id="review-section" class="customer-reviews">
+ <% reviews.forEach(review => { %>
+    <div>
+        <%
+        const starPercentage = (review.rating/ 5) * 100;
+        const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+      width_rev = starPercentageRounded;
+        %>
+        <div class="stars-outer">
+            <div class="stars-inner" style="width: <%= width_rev %>"></div>
+          </div>
+          <%= review.rating %> 
+        <%=review.headline %>
+     </div>
+    <div>by <%= review.customerid.fullname %>  <%= review.reviewtime.toDateString() + ' ' + review.reviewtime.toTimeString().split(' ')[0] %>  %></div>
+    <div>"<%= review.comment %>" </div>
+    <br>
+    <br>
+
+
+<%  }) %>
+ </div>

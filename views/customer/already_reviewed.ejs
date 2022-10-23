@@ -1,0 +1,14 @@
+<h2>you already made a review</h2>
+<form action="" method="POST">
+<h1 style="text-align:right ;"><%= customer.fullname %></h1>
+<hr>
+<h2><%= book.title %></h2>
+<img src="<%= book.coverImagePath %>" height="110px" width="84px">
+<div class="container">
+    <div id="rateYo2"><%= review.rating %></div>
+    <input type="hidden" id="rating" name="rating">
+    <input type="hidden" id="bookid" name="bookid"  value="<%= book._id %>">
+    <input type="text" name="headline" value="<%= review.headline %>" readonly="readonly">
+    <textarea name="comment" id="" cols="30" rows="10" readonly="readonly"><%= review.comment %></textarea>
+</div>
+</form>

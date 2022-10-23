@@ -1,0 +1,47 @@
+
+<header class="main-header">
+    <nav>
+<form action="/everygreen/search_books" method="GET">
+    <input type="text" name="title" value="">
+    <button type="submit">Search</button>
+</form>
+
+<div>
+    <h2>EveryGreen</h2>
+</div>
+
+<div>
+    <ul>
+    <% if(myvar) { %>
+
+        <li>
+        <a href="/everygreen/customer_profile">
+            <% if(locals.customer != null){ %>
+            <%= customer.email %></a> 
+           <% } %>
+           </li>
+           
+           <li>  <a href="/everygreen/myorders">My Orders</a> </li>
+       
+       <li>  <a href="/everygreen/logout">
+            <%- include("../partials/logout.ejs", {url : '/logout'})%></a>
+        </a>
+        </li>
+
+        <li> <a href="/everygreen/Mycart"> My Cart(
+            <% if(typeof cart != "undefined") { %>
+                <%= cart.length %>
+                <% } else { %>
+                    0
+                    <% } %>
+            ) </a>
+           </li> 
+   <% } else { %>
+    
+   <li> <a href="/everygreen/login">Sign in</a> </li>
+   <li> <a href="/everygreen/register">Register</a> </li>
+    <%}%>
+    </ul>
+</div>
+</nav>
+</header>

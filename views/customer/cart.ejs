@@ -1,0 +1,73 @@
+<h2>My Cart</h2>
+<% if(typeof cart !== "undefined") { %> 
+<table border="1" cellpadding="5">
+    <tr>
+        <th>No </th>
+        <th>Book</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>......</th>
+        <th>SubTotal</th>
+        <th>Clear Cart</th>
+    </tr>
+    <% let counter=0 %>
+    <% let total_copies = 0 %>
+    <% let total_price = 0 %>
+        <% books.forEach(book=> { %>
+        <% var sub = parseFloat(book.qty * book.price).toFixed(2) %>
+        <% total_copies += +book.qty; %>
+        <% total_price += +sub %> 
+            <tr>
+                <td>
+                    <%= ++counter %>
+                </td>
+                <td>
+                  <a href="/admin/book_management/<%= book._id %>">  <img src="<%= book.image%>" height="110px" width="84px"> </a>
+                    <%= book.title %>
+                </td>
+                <td>
+                    <%= book.qty %>
+                </td>
+                <td><%= book.price %></td>
+                <td>
+                    <a href="/everygreen/cart/update/<%= book.title %>?action=add">+</a> &nbsp; &nbsp;
+                    <a href="/everygreen/cart/update/<%= book.title %>?action=subtract">-</a> 
+                </td>
+                <td>$<%= sub %></td>
+                <td>
+                    <a href="/everygreen/cart/update/<%= book.title %>?action=clear">Clear</a>
+                </td> 
+            </tr>
+            <% }) %>
+<tr>
+    <td></td>
+    <td></td>
+    <td><span> <%= total_copies %> Copies </span></td>
+   <td> Total </td>  
+   <td> $ <%= total_price %> 
+
+</td>
+</tr>
+</table>
+<a href="/everygreen/ClearCart" class="clearcart">Clear Cart</a>
+&nbsp;
+&nbsp;
+&nbsp;
+<a href="/everygreen">Continue Shoping</a>
+&nbsp;
+&nbsp;
+&nbsp;
+<a href="/everygreen/checkout">checkout</a>
+<% } else { %>
+<span>Currently Your Cart is Empty </span>
+<% } %>
+
+
+<script>
+    $(function(){
+        $('.clearcart').on('click', function(){    
+            if(!confirm('Confirm Clear Cart'))
+            return false;
+        })
+    })
+</script>

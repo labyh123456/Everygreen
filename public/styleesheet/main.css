@@ -1,0 +1,30 @@
+/* body{
+    background-color: aqua;
+} */
+
+/* navbar */
+.main-header{
+background-color: brown;
+}
+.main-header form{
+
+}
+.main-header h2{
+    
+}
+.main-header nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.main-header ul{
+    display: flex;
+}
+.main-header li{
+    list-style: none;
+    margin: 0rem 1rem;
+}
+.main-header a{
+    text-decoration: none;
+    color: white;
+}

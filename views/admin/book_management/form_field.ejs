@@ -1,0 +1,45 @@
+<div>
+    <label>Category: </label>
+    <select name="cat">
+        <% categories.forEach(category => { %>
+        <% if(category.id===book.categoryid) { %>
+            <option selected label="<%= category.name %>" value="<%= category.id %>"> </option>
+            <% } else { %>
+                <option label="<%= category.name %>" value="<%= category.id %>"></option>
+<% } }); %>
+</select>
+<div>
+<label>Title</label>
+<input type="text" name="title" value="<%= book.title %>">
+</div>
+
+<div>
+<label>Author</label>
+<input type="text" name="author" value="<%= book.author %>">
+</div>
+
+<div>
+<label>ISBN</label>
+<input type="text" name="isbn" value="<%= book.isbn %>">
+</div>
+
+<div>
+<label>Publish Date</label>
+<input type="date" name="date"   value="<%= book.publishdate == null ? '' : book.publishdate.toISOString().split('T')[0]  %>">
+</div>
+
+<div>
+<label>Book Image</label>
+<input type="file" name="image" class="book-cover  filepond">
+</div>
+
+<div>
+<label>Price</label>
+<input type="number" name="price" value="<%= book.price %>">
+</div>
+
+<div>
+    <label>Describtion</label>
+    <input type="text" name="describtion" value="<%= book.desc %>">
+    </div>
+    </div>

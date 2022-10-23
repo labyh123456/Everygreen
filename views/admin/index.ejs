@@ -1,0 +1,86 @@
+<div class="links-container">
+    <%- include("../partials/admin_category.ejs") %>
+</div>
+<h2>Administrator Dashboard</h2>
+<hr>
+<h2>Quick Actions</h2>
+<ul>
+    <li> <a href="/admin/book_management/create_new_book">New book</a></li>
+    <li>  <a href="/admin/user_management_create_user"> New User</a></li>
+    <li> <a href="/admin/create_category"> New Category</a></li>
+    <li> <a href="/admin/customer_management/create_customer"> New Customer</a></li>
+</ul>
+<section class="sales">
+    <h2>Recent Sales</h2>
+
+    <table border="1" cellpadding="5">
+        <tr>
+        <th>Order_id</th>
+        <th>Orderd By</th>
+        <th>Book Copies</th>
+        <th>Total</th>
+        <th>Payment Method</th>
+        <th>Status</th>
+        <th>Order Date</th>
+        </tr>
+    <% order.forEach(orders => { %>
+        
+        <tr>
+            <td> <a href="/admin/order_management/<%= orders._id%>/detail"><%= orders._id%> </a></td>
+            <td> <%= orders.recname %> </td>
+            <td><%= orders.orderqty %> </td>
+            <td>$<%= orders.ordertotal %></td>
+            <td><%= orders.paymentmethod %></td>
+            <td><%= orders.orderstatus %> </td>
+            <td><%= orders.orderdate.toDateString() + ' ' +  orders.orderdate.toTimeString().split(' ')[0] %></td>
+        </tr>
+    
+    <% }) %>    
+    </table>
+
+</section>
+<hr>
+<section class="reviews">
+    <h2>Recent Reviews</h2>
+    <table border="1" cellpadding="5">
+        <tr>
+       
+            <th>Book</th>
+            <th>Rating</th>
+            <th>Headline</th>
+            <th>Customer</th>
+            <th>Review on</th>
+        
+        </tr>
+        <% let  counter2 = 0 %>
+            <% reviews.forEach(review=> { %>
+    
+                <tr>
+                    <td>
+                        <%= review.bookid.title %>
+                    </td>
+                    <td>
+                        <%= review.rating %>
+                    </td>
+                  <td> <a href="/admin/review_management/<%= review._id%>/edit"> <%= review.headline %> </a>
+                    </td>
+                    <td>
+                        <%= review.customerid.fullname %>
+                    </td>
+                    <td><%= review.reviewtime.toDateString() + ' ' +   review.reviewtime.toTimeString().split(' ')[0] %></td>
+                </tr>
+                <% }) %>
+    </table>
+</section>
+<hr>
+<section class="statistics">
+    <h2>Statistics</h2>
+<ul>
+    <li> <a href="/admin/user_management"> Total Users <%= total_users %> </a> </li>
+    <li> <a href="/admin/book_management"> Total Books <%= total_books %> </a> </li>
+    <li> <a href="/admin/customer_management"> Total Customers <%= total_customers %>  </a> </li>
+    <li> <a href="/admin/review_management"> Total Reviews <%= total_reviews %></a>  </li>
+    <li> <a href="/admin/order_management"> Total Orders <%= total_orders %> </a> </li>
+    <li> <a href="/admin/register_customer_management"> Total Registet Customer <%= total_register_customer %> </a> </li>
+</ul>
+</section>

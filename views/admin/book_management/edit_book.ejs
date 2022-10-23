@@ -1,0 +1,7 @@
+<h2>Create New Book</h2>
+<form action="/admin/book_management/<%= book.id %>/edit?_method=PUT" method="POST">
+    
+    <%- include('form_field') %>
+    <button type="submit">Update</button>
+    <a href="/admin/book_management">Cancel</a>
+</form>

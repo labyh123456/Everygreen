@@ -1,0 +1,7 @@
+<%- include("../../partials/admin_category.ejs") %>
+<h2>Edit User</h2>
+<form action="/admin/<%=user._id %>?_method=PUT" method="POST">
+    <%- include("../../partials/create_user.ejs") %>
+    <input type="submit" value="Save">
+   <a href="/admin"> <input  type="button" value="Cancel"> </a>
+</form>

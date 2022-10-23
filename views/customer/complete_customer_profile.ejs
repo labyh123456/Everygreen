@@ -1,0 +1,8 @@
+<h2>Complete Your Profile</h2>
+<form action="/everygreen/complete_customer_profile" method="POST">
+
+    <%- include("../partials/form_fields.ejs") %>
+    <input type="hidden" name="id" value="<%= id %>">
+<button type="submit">Save</button>
+<a href="/everygreen/customer_profile">Cancel</a>
+</form>

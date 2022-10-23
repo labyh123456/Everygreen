@@ -1,0 +1,12 @@
+<header>
+    <div>
+        welcome <%= user.email %> | <a href=""> <%- include("../partials/logout.ejs", {url : '/logout'})%></a>
+    </div>
+    <a href="/admin/user_management">Users</a>
+    <a href="/admin/category_management">Categories</a>
+    <a href="/admin/book_management">Books</a>
+    <a href="/admin/customer_management">Customers</a>
+    <a href="/admin/review_management">Reviews</a>
+    <a href="/admin/order_management">Orders</a>
+    
+</header>

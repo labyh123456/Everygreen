@@ -1,0 +1,43 @@
+<h2>Review Management</h2>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>index</th>
+        <th>_id</th>
+        <th>Book</th>
+        <th>Rating</th>
+        <th>Headline</th>
+        <th>Customer</th>
+        <th>Review on</th>
+        <th>Action</th>
+    </tr>
+    <% let counter=0 %>
+        <% reviews.forEach(review=> { %>
+
+            <tr>
+                <td>
+                    <%= ++counter %>
+                </td>
+                <td>
+                    <%= review._id %>
+                </td>
+                <td>
+                    <%= review.bookid.title %>
+                </td>
+                <td>
+                    <%= review.rating %>
+                </td>
+                <td>
+                    <%= review.headline %>
+                </td>
+                <td>
+                    <%= review.customerid.fullname %>
+                </td>
+                <td>
+                    <%= review.reviewtime %>
+                </td>
+                <td> <a href="/admin/review_management/<%= review._id%>/edit">Edit</a>
+                    <td>   <%- include("../../partials/delete_form", {url:`/admin/review_management/${review._id}` }) %></td>
+            </tr>
+            <% }) %>
+</table>

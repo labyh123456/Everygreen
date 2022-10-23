@@ -1,0 +1,44 @@
+<%- include("../partials//customer_header.ejs") %>
+<h2>Search Result for "<%= searchOption.title %>"</h2>
+<table>
+    <% if(books.length < 1 ){ %>
+        <h4> No Books Found for that keyword</h4>
+        <% } %>
+<% books.forEach(book => { %>
+<tr>
+    <td>
+         <img src="<%= book.coverImagePath %>" height="110px" width="84px">
+         </td> 
+     <td>  <a href="/admin/book_management/<%= book._id %>">     <h3><%= book.title %></h3> </a> </td>
+     <td>    
+        <span><a href="#"><%= book.title %></a></span>
+              <span> <%- include('../customer/Calc_Func.ejs') %>
+                 <% let a = (getAverageRating(book.bookrating)) %>
+                <%
+                const starPercentage = (a/ 5) * 100;
+                const starPercentageRounded = `${Math.round(starPercentage / 10) * 10}%`;
+              width_rev = starPercentageRounded;
+              %>
+              </span>  
+         <div class="stars-outer">
+            <div class="stars-inner" style="width: <%= width_rev %>"> </div>
+          </div>
+    </td>
+
+    <td> <h5>by <%= book.author %></h5> </td>
+
+    <td>
+         <p>
+            <% truncateText(book.desc,30) %>
+         </p>
+    </td>
+
+    <td>
+        <h3>$<%= book.price %></h3>
+    </td>
+    <td>
+        <a href="#">ADD to Cart</a>
+    </td>
+</tr>
+<% }) %>
+</table>

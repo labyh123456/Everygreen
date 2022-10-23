@@ -1,0 +1,36 @@
+<h2>orders Management SysTem</h2>
+
+<h3> <a href="/admin/orders_management/create_orders">  Create New orders  </a> </h3>
+
+<table border="1" cellpadding="5">
+    <tr>
+      <th>index</th>  
+    <th>Order_id</th>
+    <th>Orderd By</th>
+    <th>Book Copies</th>
+    <th>Total</th>
+    <th>Payment Method</th>
+    <th>Status</th>
+    <th>Order Date</th>
+    <th>Action</th>
+    </tr>
+    <% let counter = 0 %>
+<% order.forEach(orders => { %>
+    
+    <tr>
+        <td> <%= ++counter %></td>
+        <td><%= orders._id%> </td>
+        <td> <%= orders.recname %> </td>
+        <td><%= orders.orderqty %> </td>
+        <td>$<%= orders.ordertotal %></td>
+        <td><%= orders.paymentmethod %></td>
+        <td><%= orders.orderstatus %> </td>
+        <td><%= orders.orderdate.toDateString() + ' ' +  orders.orderdate.toTimeString().split(' ')[0] %></td>
+        <td> <a href="/admin/order_management/<%= orders._id%>/detail">Detail</a>
+            <a href="/admin/order_management/edit_order/<%= orders._id%>">Edit this Order</a>   
+        <td>   <%- include("../../partials/delete_form", {url:`/admin/orders_management/${orders._id}` }) %></td>
+        <td>  <a href="/admin/order_management/temp"> select </a></td>
+    </tr>
+
+<% }) %>    
+</table>

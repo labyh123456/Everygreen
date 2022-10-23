@@ -1,0 +1,18 @@
+<% 
+getAverageRating = function(BookRating){
+     let sum = 0.0;
+     if(BookRating.length < 1)
+     return 0.0;
+     BookRating.forEach(rating => {
+          sum = sum + rating;
+     })
+
+  return sum / BookRating.length;
+}%>
+
+<% 
+getRatings = function(){
+     console.log('in mode');
+     
+}
+%>

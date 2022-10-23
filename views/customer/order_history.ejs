@@ -1,0 +1,32 @@
+<h2>My Order History</h2>
+<% if(order.length < 1) { %>
+    <h2>You Have'nt Order Anything Yet ...</h2>
+<% } else { %>
+
+<table border="1" cellpadding="5">
+    <tr>
+      <th>index</th>  
+    <th>Order_id</th>
+    <th>Quantity</th>
+    <th>Total Amount</th>
+    <th>Order Date</th>
+    <th>Status</th>
+    <th>Action</th>
+    </tr>
+    <% let counter = 0 %>
+    
+<% order.forEach(orders => { %>
+    
+    <tr>
+        <td> <%= ++counter %></td>
+        <td><%= orders._id%> </td>
+        <td><%= orders.orderqty %> </td>
+        <td>$<%= orders.ordertotal %></td>
+        <td><%= orders.orderdate.toDateString() + ' ' +  orders.orderdate.toTimeString().split(' ')[0] %></td>
+        <td><%= orders.orderstatus %> </td>
+        <td> <a href="/everygreen/order/<%= orders._id%>/detail">View Details</a>
+    </tr>
+
+<% }) %>    
+</table>
+<% } %>

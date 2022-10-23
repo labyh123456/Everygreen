@@ -1,0 +1,33 @@
+<%- include("../partials/customer_header.ejs") %>
+    <%- include("../partials/customer_categories", {categories:categories}) %>
+        <h2>
+            <%=category.name %>
+        </h2>
+        <div class="book-grid" style="display: inline-block;">
+            <% books.forEach(book=> { %>
+                <a href="/everygreen/show_book/<%= book._id %>"> <img src="<%= book.coverImagePath %>" height="110px"
+                        width="84px"></a>
+                <div>
+                    <%= book.title %>
+                </div>
+                <span> Rating ***** <%- include('../customer/Calc_Func.ejs') %>
+                        <% let a=(getAverageRating(book.bookrating)) %>
+                            <span>
+                                <%= a.toPrecision(2); %>
+                            </span>
+                            <% const starPercentage=(a/ 5) * 100; const
+                                starPercentageRounded=`${Math.round(starPercentage / 10) * 10}%`;
+                                width_rev=starPercentageRounded; %>
+                                <div class="stars-outer"> 
+                                    <div class="stars-inner" style="width: <%= width_rev %>"></div>
+                                </div>
+                </span>
+                <div>
+                    <%= book.author %>
+                </div>
+
+                <div>
+                    $<%= book.price %>
+                </div>
+                <% }) %>
+        </div>

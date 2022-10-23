@@ -1,0 +1,13 @@
+<h2>header</h2>
+<h1>Edit Review</h1>
+
+<form action="/admin/review_management/<%= review._id %>?_method=PUT" method="POST">
+<h2> Book  :<%= review.bookid.title %></h2>
+<h2> Rating: <%= review.rating %></h2>
+<h2>Customer : <%= review.customerid.fullname %></h2>
+
+    <input type="text" name="headline" value="<%= review.headline %>">
+    <textarea name="comment"><%= review.comment %></textarea>
+    <button type="submit">Save</button>
+    <a href="/">cancel</a>
+</form>

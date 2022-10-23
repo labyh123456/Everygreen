@@ -1,0 +1,116 @@
+<%- include('../partials/customer_header') %>
+<%- include('../partials/customer_categories', {categories: categories}) %>
+
+<h2>Review Your Order Details <a href="/everygreen/Mycart">Edit</a><h2>
+<% if(typeof cart !== "undefined") { %> 
+<table border="1" cellpadding="5">
+    <tr>
+        <th>No </th>
+        <th>Book</th>
+        <th>Author</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>SubTotal</th>
+    </tr>
+    <% let counter=0 %>
+    <% let total_copies = 0 %>
+    <% let total_price = 0 %>
+        <% books.forEach(book=> { %>
+        <% var sub = parseFloat(book.qty * book.price).toFixed(2) %>
+        <% total_copies += +book.qty; %>
+        <% total_price += +sub %> 
+            <tr>
+                <td>
+                    <%= ++counter %>
+                </td>
+                <td>
+                  <a href="/admin/book_management/<%= book._id %>">  <img src="<%= book.image%>" height="110px" width="84px"> </a>
+                    <%= book.title %>
+                </td>
+                <td><%= book.book_author %></td>
+                <td><%= book.price %></td>
+                <td>
+                    <%= book.qty %>
+                </td>
+                <td>$<%= sub %></td>
+            </tr>
+            <% }) %>
+<tr>
+    <td></td>
+    <td></td>
+    <td></td>
+   <td> Total </td>
+   <td><span> <%= total_copies %></span></td>  
+   <td> $ <%= total_price %> 
+
+</td>
+</tr>
+</table>
+<h2>Your Shiping Information</h2>
+<form action="/everygreen/placeOrder" method="POST">
+    <div>
+        <input type="hidden" name="total_price" value="<%= total_price %>">
+        <input type="hidden" name="total_copies" value="<%= total_copies %>">
+        <input type="hidden" name="customerid" value="<%= user._id %>">
+        <label>Recepient Name</label>
+        <input type="text" name="rname"  value="<%= user.fullname %>">
+    </div>
+
+    <div>
+        <label>Recepient Phone</label>
+        <input type="text" name="rnumber"  value="<%= user.phonenumber %>">
+    </div>
+    <div>
+        <label>Street Address</label>
+        <input type="text" name="raddress"  value="<%= user.address %>">
+    </div>
+
+    <div>
+        <label>City</label>
+        <input type="text"   name="rcity" value="<%= user.city %>">
+    </div>
+
+    <div>
+        <label>Zip Code</label>
+        <input type="text"  name="rzipcode" value="<%= user.zipcode %>">
+    </div>
+
+    <div>
+        <label>Country</label>
+        <input type="text"  name="rcountry" value="<%= user.country %>">
+    </div>
+
+    <div>
+    <h3>Choose Your Payment</h3>
+    <span>Choose Your Payment Method
+       <select name="paymentmethod">
+        <option value="Cash on delievery">Cash on delievery</option>
+        <option value="Paypal">Paypal</option>
+        <option value="Creadit">Creadit or Debit</option>
+        <option value="bank">Bank Transfer</option>
+       </select> 
+    </span>
+    </div>
+<button type="submit">Place an Order</button>
+</form>
+&nbsp;
+&nbsp;
+&nbsp;
+<a href="/everygreen">Continue Shoping</a>
+&nbsp;
+&nbsp;
+&nbsp;
+
+<% } else { %>
+<span>Currently Your Cart is Empty </span>
+<% } %>
+
+
+<script>
+    $(function(){
+        $('.clearcart').on('click', function(){    
+            if(!confirm('Confirm Clear Cart'))
+            return false;
+        })
+    })
+</script></h2>

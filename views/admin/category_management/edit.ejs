@@ -1,0 +1,8 @@
+
+<h2>Edit Category</h2>
+<form action="/admin/category_management/<%=category._id%>/edit?_method=PUT" method="POST">
+   <label>Enter Category Name</label>
+    <input type="text" value="<%= category.name %>" name="name">
+    <input type="submit" value="Save">
+   <a href="/admin"> <input  type="button" value="Cancel"> </a>
+</form>
